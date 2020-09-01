@@ -584,7 +584,6 @@ postgresql_initialize() {
             is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
         else
-            rm -fr "$POSTGRESQL_DATA_DIR"/
             postgresql_slave_init_db
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
             is_boolean_yes "$create_conf_file" && postgresql_configure_replication_parameters
