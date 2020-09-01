@@ -563,7 +563,7 @@ postgresql_initialize() {
         is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
         is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
         [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]] && [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && postgresql_add_replication_to_pghba
-        [[ "$POSTGRESQL_REPLICATION_MODE" = "slave" ]] && postgresql_configure_recovery
+        [[ "$POSTGRESQL_REPLICATION_MODE" = "slave" ]] && postgresql_slave_init_db
     else
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             postgresql_master_init_db
